@@ -1,29 +1,123 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-header{
+header {
     text-align: center;
     margin: 1.5rem auto;
 }
 
-header h1{
+header h1 {
     font-size: 42px;
     transition: all 0.5s ease;
 }
 
-header h1 span{
+header h1 span {
     border-bottom: 4px solid black;
-
 }
 
-header h1:hover{
-    scale: 1.1;
+header h1:hover {
+    transform: scale(1.1);
 }
 
-.container{
+.container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 0.5fr 1fr;
+    gap: 40px;
+    margin: 50px;
+    max-height: 90vh;
 }
+
+.patientAdder, .patientController{
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+.patientAdder{
+    height: 450px;
+}
+
+.patientAdder h1, .patientController h1{
+    text-align: center;
+    font-size: 32px;
+    margin: 0.5rem;
+}
+
+.form-container{
+    margin: 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-container input{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    outline: none;
+}
+
+.add-btn{
+    margin: 5px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.add-btn:hover{
+    transform: translateY(5px);
+    background-color: white;
+    transition: all 0.5s ease;
+}
+
+.scrollable-content {
+    overflow-y: auto; /* para que la columna de la derecha tenga scroll down*/
+}
+
+.content-wrapper {
+    max-height: 700px; /* Altura máxima del contenido desplazable */
+    padding: 10px; /* Espaciado interno para separar el contenido de los bordes */
+}
+
+.patientList{
+    list-style: none;
+}
+
+.patientInfo{
+    margin: 10px 20px;
+}
+
+.patientInfo h3{
+    text-decoration: underline;
+}
+
+.remove{
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: crimson;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.remove:hover{
+    transform: translateY(5px) scale(1.05);
+    transition: all 0.5s ease;
+
+}
+
+
