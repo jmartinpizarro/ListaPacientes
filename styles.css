@@ -39,8 +39,10 @@ header h1:hover {
 }
 
 .patientAdder{
-    height: 450px;
+    height: 500px;
 }
+
+
 
 .patientAdder h1, .patientController h1{
     text-align: center;
@@ -117,7 +119,11 @@ header h1:hover {
 .remove:hover{
     transform: translateY(5px) scale(1.05);
     transition: all 0.5s ease;
+}
 
+.error{
+    color: red;
+    display: none;
 }
 
 
