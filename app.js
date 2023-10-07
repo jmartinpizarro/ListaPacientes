@@ -12,29 +12,7 @@ function checkAge(element){
     }
 };
 
-
-// creación y append del paciente a la lista
-addBtn.addEventListener("click", function(){
-    inputForm =[document.getElementById("patientName").value,
-                document.getElementById("patientSurname").value, 
-                document.getElementById("age").value, 
-                document.getElementById("illness").value, 
-                document.getElementById("description").value];
-
-    // arreglamos el formulario
-    for (var i = 0; i < inputForm.length; i++){
-        if (inputForm[i] == ""){
-            inputForm[i] = "No definido";
-        };
-    };
-    const isAge = checkAge(inputForm[2])
-    if (isAge == false){
-        error.style.display = "block";
-    } else {
-        error.style.display = "none";
-    };
-
-
+function patientCreator(){
     // generación de la información del paciente
     const li = document.createElement("li"),
     div = document.createElement("div"),
@@ -59,13 +37,84 @@ addBtn.addEventListener("click", function(){
     div.classList.toggle("patientInfo");
     li.appendChild(div);
     patientList.appendChild(li);
+};
 
-    inputForm = []; // reset del array
+function resetForm() {
+    var toChange = [
+        document.querySelector("#patientName"),
+        document.querySelector("#patientSurname"),
+        document.querySelector("#age"),
+        document.querySelector("#illness"),
+        document.querySelector("#description")
+    ];
+    for (let i = 0; i < toChange.length; i++) {
+        toChange[i].value = "";
+    }
+}
+
+function patientRemover(button) {
+    var btnRemover = button;
+    if (btnRemover.classList.contains("remove")) {
+        // Eliminar el paciente del DOM
+        btnRemover.parentElement.parentElement.remove();
+
+        // Buscar la posición del paciente en inputForm
+        const patientIndex = patientList.indexOf(btnRemover.parentElement.parentElement);
+
+        // Eliminar el paciente de inputForm
+        if (patientIndex !== -1) {
+            inputForm.splice(patientIndex, 1); // index desde el que borrar, elementos a borrar
+        }
+        // Guardar la versión actualizada de inputForm en el localStorage --> mucho más fácil que intentar modificar directamente el localStorage.
+        saveToLocalStorage();
+    }
+}
+
+
+//LOCAL STORAGE IMPLEMENTATION
+function saveToLocalStorage() {
+    localStorage.setItem("patientData", JSON.stringify(inputForm));
+}
+
+function loadFromLocalStorage() {
+    const storedData = localStorage.getItem("patientData");
+    if (storedData) {
+        inputForm = JSON.parse(storedData);
+        patientCreator();
+    }
+}
+
+
+window.addEventListener("load", loadFromLocalStorage);
+
+// creación y append del paciente a la lista
+addBtn.addEventListener("click", function(){
+    inputForm =[document.getElementById("patientName").value,
+                document.getElementById("patientSurname").value, 
+                document.getElementById("age").value, 
+                document.getElementById("illness").value, 
+                document.getElementById("description").value];
+
+    // arreglamos el formulario
+    for (var i = 0; i < inputForm.length; i++){
+        if (inputForm[i] == ""){
+            inputForm[i] = "No definido";
+        };
+    };
+    const isAge = checkAge(inputForm[2])
+    if (isAge == false){
+        error.style.display = "block";
+        return
+    } else {
+        error.style.display = "none";
+    };
+
+    patientCreator();
+    saveToLocalStorage();
+    resetForm();
 });
 
 patientList.addEventListener("click", function(e){
-    var btnRemover = e.target; //esto puede o no puede ser un botón. Ahora nos aseguraremos de que sea un botón para poder borrar al paciente
-    if (btnRemover.classList == "remove"){
-        btnRemover.parentElement.parentElement.remove();
-    }
+    patientRemover(e.target);
 });
+
