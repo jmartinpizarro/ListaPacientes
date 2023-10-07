@@ -55,37 +55,10 @@ function resetForm() {
 function patientRemover(button) {
     var btnRemover = button;
     if (btnRemover.classList.contains("remove")) {
-        // Eliminar el paciente del DOM
         btnRemover.parentElement.parentElement.remove();
-
-        // Buscar la posición del paciente en inputForm
-        const patientIndex = patientList.indexOf(btnRemover.parentElement.parentElement);
-
-        // Eliminar el paciente de inputForm
-        if (patientIndex !== -1) {
-            inputForm.splice(patientIndex, 1); // index desde el que borrar, elementos a borrar
-        }
-        // Guardar la versión actualizada de inputForm en el localStorage --> mucho más fácil que intentar modificar directamente el localStorage.
-        saveToLocalStorage();
     }
 }
 
-
-//LOCAL STORAGE IMPLEMENTATION
-function saveToLocalStorage() {
-    localStorage.setItem("patientData", JSON.stringify(inputForm));
-}
-
-function loadFromLocalStorage() {
-    const storedData = localStorage.getItem("patientData");
-    if (storedData) {
-        inputForm = JSON.parse(storedData);
-        patientCreator();
-    }
-}
-
-
-window.addEventListener("load", loadFromLocalStorage);
 
 // creación y append del paciente a la lista
 addBtn.addEventListener("click", function(){
@@ -110,7 +83,6 @@ addBtn.addEventListener("click", function(){
     };
 
     patientCreator();
-    saveToLocalStorage();
     resetForm();
 });
 
