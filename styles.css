@@ -30,7 +30,7 @@ header h1:hover {
     grid-template-columns: 0.5fr 1fr;
     gap: 40px;
     margin: 50px;
-    max-height: 90vh;
+
 }
 
 .patientAdder, .patientController{
@@ -89,8 +89,8 @@ header h1:hover {
 }
 
 .content-wrapper {
-    max-height: 700px; /* Altura máxima del contenido desplazable */
-    padding: 10px; /* Espaciado interno para separar el contenido de los bordes */
+    max-height: 700px; 
+    padding: 10px; 
 }
 
 .patientList{
@@ -124,6 +124,52 @@ header h1:hover {
 .error{
     color: red;
     display: none;
+}
+
+@media screen and (max-width: 1400px) {
+    .form-container input{
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .patientAdder{
+        max-width: 850%;
+        max-height: 420px;
+    }
+
+    .patientAdder h1{
+        padding: 10px 15px;
+        font-size: 26px;
+    }
+
+    .patientController{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    header h1{
+        font-size: 26px;
+    }
+
+    .patientController h1{
+        font-size: 26px;
+    }
+
+    .remove{
+        font-size: 14px;
+        padding: 10px 15px;
+    }
 }
 
 
